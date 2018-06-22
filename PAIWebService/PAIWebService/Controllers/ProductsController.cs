@@ -16,14 +16,14 @@ namespace PAIWebService.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         // GET: api/Products
-        [AllowAnonymous]
+        
         public IQueryable<Product> GetProducts()
         {
-            return db.Products;
+            return db.Products.Include(b => b.category) ;
         }
 
         // GET: api/Products/5
-        [AllowAnonymous]
+     
         [ResponseType(typeof(Product))]
         public IHttpActionResult GetProduct(int id)
         {
@@ -35,7 +35,7 @@ namespace PAIWebService.Controllers
 
             return Ok(product);
         }
-        [Authorize(Roles ="admin")]
+        
         // PUT: api/Products/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutProduct(int id, Product product)

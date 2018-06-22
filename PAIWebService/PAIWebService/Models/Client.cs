@@ -11,7 +11,12 @@ namespace PAIWebService.Models
         public string nazwa { get; set; }
         public string adres { get; set; }
         public string miasto { get; set; }
+        public DateTime data { get; set; }
 
         public virtual ApplicationUser user { get; set; }
+        public Client()
+        {
+            data = DateTime.Now;
+        }
     }
 }
