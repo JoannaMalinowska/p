@@ -9,17 +9,22 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using PAIwebservice_local.Models;
+using PAIwebservice_local.DAL.repositories;
+using PAIwebservice_local.DAL;
 
 namespace PAIwebservice_local.Controllers
 {
     public class CategoriesController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        Synchro s = new Synchro();
+
 
         // GET: api/Categories
-        public IQueryable<Category> GetCategories()
+        public async System.Threading.Tasks.Task<List<Category>> GetCategories()
         {
-            return db.Categories;
+            await s.RunAsync();
+            return CategoryRepository.GetCategories();
         }
 
         // GET: api/Categories/5

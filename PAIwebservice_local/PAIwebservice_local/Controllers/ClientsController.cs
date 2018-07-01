@@ -9,17 +9,21 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using PAIwebservice_local.Models;
+using PAIwebservice_local.DAL;
+using PAIwebservice_local.DAL.repositories;
 
 namespace PAIwebservice_local.Controllers
 {
     public class ClientsController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        Synchro s = new Synchro();
 
         // GET: api/Clients
-        public IQueryable<Client> GetClients()
+        public async System.Threading.Tasks.Task<List<Client>> GetClients()
         {
-            return db.Clients;
+            await s.RunAsync();
+            return ClientRepository.GetClients();
         }
 
         // GET: api/Clients/5
