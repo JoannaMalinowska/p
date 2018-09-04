@@ -31,6 +31,22 @@ namespace PAIWebService.DAL
             };
             Admin.Roles.Add(AdminRole);
             context.SaveChanges();
+
+            var category = new Category
+            {
+                nazwa_kategorii = "budowlane"
+            };
+            context.Categories.Add(category);
+
+            var listproducts = new List<Product>
+            {
+              new Product{ nazwa = "cement", opis = "to jest cement", zdjecie = "tu link", cena = 3.5, category = category },
+              new Product{ nazwa = "pustak", opis = "to jest pustak", zdjecie = "tutaj link", cena = 4.9, category = category },
+              new Product{ nazwa = "zaprawa", opis = "to jest zaprawa", zdjecie = "tu link", cena = 12.5, category = category }
+
+            };
+            listproducts.ForEach(s => context.Products.Add(s));
+
         }
     }
 }
